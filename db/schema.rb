@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_03_15_145333) do
   create_table "checks", force: :cascade do |t|
-    t.integer "total_sum_id", null: false
+    t.integer "total_sum_id"
     t.string "title"
     t.text "body"
     t.integer "cost"
@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_15_145333) do
   end
 
   create_table "total_sums", force: :cascade do |t|
-    t.integer "checks_id", null: false
+    t.integer "checks_id"
     t.string "title"
     t.text "for_what"
     t.integer "count"
