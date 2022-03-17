@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Total Sums</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title </th>
+    <th>For What</th>
+    <th> Count</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @total_sums.each do |total_sum| %>
+    <tr>
+      <td><%= total_sum.title %></td>
+      <td><%= total_sum.for_what %></td>
+      <td><%= total_sum.count %></td>
+      <td><%= link_to 'Show', total_sum %></td>
+      <td><%= link_to 'Edit', edit_total_sum_path(total_sum) %></td>
+      <td><%= button_to 'Destroy', total_sum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Total Sum', new_total_sum_path%>

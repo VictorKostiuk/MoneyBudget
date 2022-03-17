@@ -1,4 +1,4 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 class TotalSumsController < ApplicationController
   before_action :set_total_sum, only: %i[show edit update destroy]
@@ -16,10 +16,9 @@ class TotalSumsController < ApplicationController
   def show; end
 
   def create
-    @total_sum = TotalSum.build total_sum_params
-
+    @total_sum = TotalSum.create total_sum_params
     if @total_sum.save
-      redirect_to
+      redirect_to total_sum_path(@total_sum), status: :ok
     else
       render :new
     end
@@ -27,7 +26,7 @@ class TotalSumsController < ApplicationController
 
   def update
     if @total_sum.update total_sum_params
-      redirect_to
+      redirect_to total_sum_path(@total_sum), status: :ok
     else
       render :edit
     end
@@ -35,13 +34,13 @@ class TotalSumsController < ApplicationController
 
   def destroy
     @total_sum.destroy
-    redirect_to
+    redirect_to total_sums_path, status: :no_content
   end
 
   private
 
   def total_sum_params
-    params.require(:total_sum).permit(:title, :for_what, :count, :check_id)
+    params.require(:total_sum).permit(:title, :for_what, :count, :checks_id)
   end
 
   def set_total_sum

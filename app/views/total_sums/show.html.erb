@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @total_sum.title %>
+</p>
+
+<p>
+  <strong>For What:</strong>
+  <%= @total_sum.for_what %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @total_sum.count %>
+</p>
+
+<p>
+  <strong>Checks:</strong>
+  <%= @total_sum.checks.each do |f| %>
+  <p><%= f.title %></p>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_total_sum_path(@total_sum) %> |
+<%= link_to 'Back', total_sums_path %>
