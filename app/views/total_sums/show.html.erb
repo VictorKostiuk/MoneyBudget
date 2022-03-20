@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @total_sum.title %>
@@ -14,13 +12,33 @@
   <strong>Count:</strong>
   <%= @total_sum.count %>
 </p>
+<hr>
+<h4>Add new check</h4>
 
-<p>
-  <strong>Checks:</strong>
-  <%= @total_sum.checks.each do |f| %>
-  <p><%= f.title %></p>
-  <% end %>
-</p>
+<%= render 'checks/form', total_sum_id: @total_sum.id %>
+
+<hr>
+<h4>All checks</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Title </th>
+      <th>Body</th>
+      <th>Cost</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @total_sum.checks.each do |check| %>
+      <tr>
+        <td><%= check.title %></td>
+        <td><%= check.body %></td>
+        <td><%= check.cost %></td>
+      </tr>
+      <br>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_total_sum_path(@total_sum) %> |
 <%= link_to 'Back', total_sums_path %>

@@ -53,10 +53,10 @@ RSpec.describe ChecksController, type: :controller do
   end
 
   describe "POST create" do
-    let(:total_sum) { FactoryBot.create(:total_sum) }
+    let!(:total_sum) { FactoryBot.create(:total_sum) }
 
     it "assigns @teams" do
-      post :create, params: { check: { title: "default", body: "default", cost: 111, total_sum_id: total_sum.id } }
+      post :create, params: { check: { title: "default", body: "default", cost: 111 }, total_sum_id: total_sum.id }
       expect(assigns["check"].id).to eq(1)
       expect(assigns["check"].title).to eq("default")
       expect(assigns["check"].body).to eq("default")
@@ -64,7 +64,7 @@ RSpec.describe ChecksController, type: :controller do
     end
 
     it "renders the http status ok" do
-      post :create, params: { check: { title: "default", body: "default", cost: 111, total_sum_id: total_sum.id } }
+      post :create, params: { check: { title: "default", body: "default", cost: 111 }, total_sum_id: total_sum.id }
       expect(response).to have_http_status(:ok)
     end
   end

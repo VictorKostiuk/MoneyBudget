@@ -46,6 +46,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 
 # gem "sassc-rails"
+gem 'devise'
+
 
 # gem "image_processing", "~> 1.2"
 
@@ -57,6 +59,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'rails-controller-testing'
+  gem 'capybara'
 end
 group :development do
   gem 'web-console'

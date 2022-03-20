@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+<% else %>
+  <%= link_to 'log in', new_user_session_path, class: "nav-link" %>
+  <br>
+  <%= link_to 'Sign up', new_user_registration_path, class: "nav-link" %>
+<% end %>
 
 <h1>Total Sums</h1>
 
@@ -28,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Total Sum', new_total_sum_path%>
+<%= link_to 'New Total Sum', new_total_sum_path %>

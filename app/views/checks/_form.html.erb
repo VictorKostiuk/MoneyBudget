@@ -1,0 +1,20 @@
+<%= form_with(model: [@total_sum, @check]) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_field :body %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.number_field :cost %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

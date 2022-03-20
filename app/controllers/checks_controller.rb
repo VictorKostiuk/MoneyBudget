@@ -2,12 +2,10 @@
 
 class ChecksController < ApplicationController
   before_action :set_check, only: %i[show edit update destroy]
+  before_action :set_total_sum, only: %i[create]
+
   def index
     @checks = Check.all
-  end
-
-  def new
-    @check = Check.new
   end
 
   def edit; end
@@ -15,11 +13,11 @@ class ChecksController < ApplicationController
   def show; end
 
   def create
-    @check = Check.create check_params
+    @check = @total_sum.checks.build check_params
     if @check.save
-      redirect_to check_path(@check), status: :ok
+      redirect_to total_sums_path(@total_sum), status: :ok
     else
-      render :new
+      render 'total_sums/show'
     end
   end
 
@@ -44,5 +42,9 @@ class ChecksController < ApplicationController
 
   def set_check
     @check = Check.find params[:id]
+  end
+
+  def set_total_sum
+    @total_sum = TotalSum.find params[:total_sum_id]
   end
 end
