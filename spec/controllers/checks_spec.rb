@@ -68,29 +68,39 @@ RSpec.describe ChecksController, type: :controller do
 
   describe 'PUT update' do
     let(:total_sum) { FactoryBot.create(:total_sum) }
-    let(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
 
-    context 'Method update successfully renders' do
-      it 'assigns @teams' do
-        post :update, params: { id: check.id, check: { title: 'default1' } }
-        expect(assigns['check'].title).to eq('default1')
+    context 'valid attributes' do
+      let(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
+      it 'assigns the requested check to @check' do
+        patch :update, params: { check: FactoryBot.attributes_for(:check), id: check.id }
+        expect(assigns(:check)).to eq check
       end
 
-      it 'renders the http status ok' do
-        post :update, params: { id: check.id, check: { title: 'default1' } }
+      it 'changes check attributes' do
+        patch :update, params: { check: { title: 'New', body: 'News', cost: 321 }, total_sum_id: total_sum.id, id: check.id }
+        check.reload
+        expect(check.title).to eq 'New'
+        expect(check.body).to eq 'News'
+      end
+
+      it 'redirects to the updated check' do
+        patch :update, params: { check: FactoryBot.attributes_for(:check), id: check.id }
         expect(response).to have_http_status(:ok)
       end
     end
 
-    context 'Method update not successfully renders' do
-      it 'assigns @teams' do
-        post :update, params: { id: check.id, check: { title: 'default' } }
-        expect(assigns['check'].title).not_to eq('default1')
+    context 'invalid attributes' do
+      let(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
+      it 'does not change check attributes' do
+        patch :update, params: { check: { title: 'New', body: nil, cost: 321 }, id: check.id }
+        check.reload
+        expect(check.title).to eq 'default'
+        expect(check.body).to eq 'for_that'
       end
 
-      it 'renders the http status ok' do
-        post :update, params: { id: check.id, check: { title: 'default' } }
-        expect(response).to have_http_status(:ok)
+      it 're-renders edit view' do
+        patch :update, params: { check: { title: 'New', body: nil, cost: 321 }, id: check.id }
+        expect(response).to render_template :edit
       end
     end
   end
@@ -98,31 +108,25 @@ RSpec.describe ChecksController, type: :controller do
   describe 'POST create' do
     let!(:total_sum) { FactoryBot.create(:total_sum) }
 
-    context 'Method create successfully renders' do
-      it 'assigns @teams' do
-        post :create, params: { check: { title: 'default', body: 'default', cost: 111 }, total_sum_id: total_sum.id }
-        expect(assigns['check'].id).to eq(1)
-        expect(assigns['check'].title).to eq('default')
-        expect(assigns['check'].body).to eq('default')
-        expect(assigns['check'].cost).to eq(111)
+    context 'with valid attributes' do
+      it 'saves the new check' do
+        expect { post :create, params: { check: FactoryBot.attributes_for(:check), total_sum_id: total_sum.id } }.to change { Check.count }.by(1)
       end
 
-      it 'renders the http status ok' do
-        post :create, params: { check: { title: 'default', body: 'default', cost: 111 }, total_sum_id: total_sum.id }
+      it 'redirects to show view' do
+        post :create, params: { check: FactoryBot.attributes_for(:check), total_sum_id: total_sum.id }
         expect(response).to have_http_status(:ok)
       end
     end
 
-    context 'Method create not successfully renders' do
-      it 'assigns @teams' do
-        post :create, params: { check: { title: 'default', body: 'default', cost: 'fe' }, total_sum_id: total_sum.id }
-
-        expect(assigns['check'].cost).not_to eq('fe')
+    context 'with invalid attributes' do
+      it 'does not save the check' do
+        expect { post :create, params: { check: FactoryBot.attributes_for(:invalid_check), total_sum_id: total_sum.id } }.to_not change { Check.count }
       end
 
-      it 'renders the http status ok' do
-        post :create, params: { check: { title: 'default', body: 'default', cost: 'adw' }, total_sum_id: total_sum.id }
-        expect(response).to have_http_status(:ok)
+      it 're-renders new view' do
+        post :create, params: { check: FactoryBot.attributes_for(:invalid_check), total_sum_id: total_sum.id }
+        expect(response).to render_template "total_sums/show"
       end
     end
   end
@@ -130,14 +134,13 @@ RSpec.describe ChecksController, type: :controller do
   describe 'DELETE destroy' do
     let(:total_sum) { FactoryBot.create(:total_sum) }
     let!(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
+    it 'assigns @teams' do
+      expect { delete :destroy, params: { id: check.id } }.to change { Check.count }.by(-1)
+    end
 
-      it 'assigns @teams' do
-        expect { delete :destroy, params: { id: check.id } }.to change { Check.count }.by(-1)
-      end
-
-      it 'renders the http status no content' do
-        delete :destroy, params: { id: check.id }
-        expect(response).to have_http_status(:no_content)
+    it 'renders the http status no content' do
+      delete :destroy, params: { id: check.id }
+      expect(response).to have_http_status(:no_content)
     end
   end
 end

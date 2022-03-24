@@ -6,4 +6,9 @@ FactoryBot.define do
     for_what { 'for_that' }
     count { 123 }
   end
+  factory :invalid_total_sum, class: TotalSum do
+    title { nil }
+    for_what { nil }
+    count { nil }
+  end
 end

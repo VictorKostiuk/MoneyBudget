@@ -28,7 +28,7 @@ class TotalSumsController < ApplicationController
 
   def update
     if @total_sum.update total_sum_params
-      redirect_to total_sums_path(@total_sum), status: :ok
+      redirect_to total_sum_path(@total_sum), status: :ok
     else
       render :edit
     end
