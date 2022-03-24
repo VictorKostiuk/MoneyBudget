@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     resources :checks
   end
 
-  root "total_sums#index"
+  root 'total_sums#index'
 end

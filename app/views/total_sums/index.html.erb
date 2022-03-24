@@ -25,13 +25,16 @@
       <td><%= total_sum.for_what %></td>
       <td><%= total_sum.count %></td>
       <td><%= link_to 'Show', total_sum %></td>
-      <td><%= link_to 'Edit', edit_total_sum_path(total_sum) %></td>
-      <td><%= button_to 'Destroy', total_sum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_total_sum_path(total_sum) %></td>
+        <td><%= button_to 'Destroy', total_sum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
 </table>
 
 <br>
-
+<% if user_signed_in? %>
 <%= link_to 'New Total Sum', new_total_sum_path %>
+<% end %>

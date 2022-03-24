@@ -3,6 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Check, type: :model do
-  it { should belong_to :total_sum }
-  it { should validate_presence_of :body }
+  it { is_expected.to belong_to :total_sum }
+  it { is_expected.to validate_presence_of :body }
 end

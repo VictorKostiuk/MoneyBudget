@@ -15,7 +15,7 @@ class ChecksController < ApplicationController
   def create
     @check = @total_sum.checks.build check_params
     if @check.save
-      redirect_to total_sums_path(@total_sum), status: :ok
+      redirect_to total_sum_path(@total_sum), status: :ok
     else
       render 'total_sums/show'
     end

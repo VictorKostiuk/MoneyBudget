@@ -48,18 +48,17 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 gem 'devise'
 
-
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem 'capybara'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'pry-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 5.0'
-  gem 'rails-controller-testing'
-  gem 'capybara'
 end
 group :development do
   gem 'web-console'
@@ -69,4 +68,5 @@ group :development do
   # gem "spring"
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'rubocop-rspec', require: false
 end
