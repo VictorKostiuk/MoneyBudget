@@ -53,7 +53,6 @@ RSpec.describe ChecksController, type: :controller do
 
     context 'Method show not successfully renders' do
       it 'assigns @teams' do
-
         get :show, params: { id: checks[1].id }
 
         expect(assigns['check'].id).not_to eq(checks[0].id)
@@ -71,13 +70,15 @@ RSpec.describe ChecksController, type: :controller do
 
     context 'valid attributes' do
       let(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
+
       it 'assigns the requested check to @check' do
         patch :update, params: { check: FactoryBot.attributes_for(:check), id: check.id }
         expect(assigns(:check)).to eq check
       end
 
       it 'changes check attributes' do
-        patch :update, params: { check: { title: 'New', body: 'News', cost: 321 }, total_sum_id: total_sum.id, id: check.id }
+        patch :update,
+              params: { check: { title: 'New', body: 'News', cost: 321 }, total_sum_id: total_sum.id, id: check.id }
         check.reload
         expect(check.title).to eq 'New'
         expect(check.body).to eq 'News'
@@ -91,6 +92,7 @@ RSpec.describe ChecksController, type: :controller do
 
     context 'invalid attributes' do
       let(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
+
       it 'does not change check attributes' do
         patch :update, params: { check: { title: 'New', body: nil, cost: 321 }, id: check.id }
         check.reload
@@ -110,7 +112,9 @@ RSpec.describe ChecksController, type: :controller do
 
     context 'with valid attributes' do
       it 'saves the new check' do
-        expect { post :create, params: { check: FactoryBot.attributes_for(:check), total_sum_id: total_sum.id } }.to change { Check.count }.by(1)
+        expect do
+          post :create, params: { check: FactoryBot.attributes_for(:check), total_sum_id: total_sum.id }
+        end.to change(Check, :count).by(1)
       end
 
       it 'redirects to show view' do
@@ -121,12 +125,15 @@ RSpec.describe ChecksController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not save the check' do
-        expect { post :create, params: { check: FactoryBot.attributes_for(:invalid_check), total_sum_id: total_sum.id } }.to_not change { Check.count }
+        expect do
+          post :create,
+               params: { check: FactoryBot.attributes_for(:invalid_check), total_sum_id: total_sum.id }
+        end.not_to change(Check, :count)
       end
 
       it 're-renders new view' do
         post :create, params: { check: FactoryBot.attributes_for(:invalid_check), total_sum_id: total_sum.id }
-        expect(response).to render_template "total_sums/show"
+        expect(response).to render_template 'total_sums/show'
       end
     end
   end
@@ -134,8 +141,9 @@ RSpec.describe ChecksController, type: :controller do
   describe 'DELETE destroy' do
     let(:total_sum) { FactoryBot.create(:total_sum) }
     let!(:check) { FactoryBot.create(:check, total_sum_id: total_sum.id) }
+
     it 'assigns @teams' do
-      expect { delete :destroy, params: { id: check.id } }.to change { Check.count }.by(-1)
+      expect { delete :destroy, params: { id: check.id } }.to change(Check, :count).by(-1)
     end
 
     it 'renders the http status no content' do

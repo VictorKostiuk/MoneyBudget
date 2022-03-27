@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe 'User creates a total_sum' do
-  let(:user) { FactoryBot.create(:user) }
+RSpec.describe 'User creates a total_sum', driver: :selenium_chrome do
   let(:total_sum) { FactoryBot.create(:total_sum) }
 
   it 'Registered user try create total_sum' do
-    log_in(user)
+    sign_up
     create_total_sum
 
     expect(page).to have_content 'You are being redirected.'

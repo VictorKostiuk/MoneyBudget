@@ -7,7 +7,7 @@ FactoryBot.define do
     cost { 123 }
   end
 
-  factory :invalid_check, class: Check do
+  factory :invalid_check, class: 'Check' do
     title { nil }
     body { nil }
     cost { nil }

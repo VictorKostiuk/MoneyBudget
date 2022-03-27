@@ -30,11 +30,4 @@ module FeatureHelpers
     fill_in 'Cost', with: 12
     click_on 'Create Check'
   end
-
-  def check(user, total_sum)
-    log_in(user)
-    visit total_sum_path(total_sum)
-    create_check
-    click_on 'redirected'
-  end
 end

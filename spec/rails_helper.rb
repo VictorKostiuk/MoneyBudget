@@ -6,9 +6,13 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
+# parallelize(workers: :number_of_processors, with: :threads)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
+require 'support/database_cleaner'
 require 'rspec/rails'
 require 'factory_bot'
+require 'capybara/rspec'
+require 'capybara'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -43,6 +47,12 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.javascript_driver = :selenium_chrome
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -50,11 +60,10 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
-
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -77,4 +86,5 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
 
   config.include FeatureHelpers, type: :feature
+  config.use_transactional_fixtures = false
 end

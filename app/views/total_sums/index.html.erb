@@ -1,38 +1,35 @@
-<% if user_signed_in? %>
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-<% else %>
-  <%= link_to 'log in', new_user_session_path, class: "nav-link" %>
-  <br>
-  <%= link_to 'Sign up', new_user_registration_path, class: "nav-link" %>
-<% end %>
-
 <h1>Total Sums</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Title </th>
-    <th>For What</th>
-    <th> Count</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
 
-  <tbody>
   <% @total_sums.each do |total_sum| %>
-    <tr>
-      <td><%= total_sum.title %></td>
-      <td><%= total_sum.for_what %></td>
-      <td><%= total_sum.count %></td>
-      <td><%= link_to 'Show', total_sum %></td>
-      <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_total_sum_path(total_sum) %></td>
-        <td><%= button_to 'Destroy', total_sum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tr>
+<!--    <tr>-->
+<!--      <td><%#= total_sum.title %></td>-->
+<!--      <td><%#= total_sum.for_what %></td>-->
+<!--      <td><%#= total_sum.count %></td>-->
+<!--      <td><%#= link_to 'Show', total_sum %></td>-->
+      <%# if user_signed_in? %>
+<!--        <td><%#= link_to 'Edit', edit_total_sum_path(total_sum) %></td>-->
+<!--        <td><%#= button_to 'Destroy', total_sum, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <%# end %>
+<!--    </tr>-->
+  <article class="card my-3">
+    <section class="card-header">
+      <h3><%= link_to total_sum.title, total_sum_path(total_sum) %></h3>
+    </section>
+    <div class="card-body">
+  <section class="card-text">
+      <p class="my-2">
+        <%= truncate strip_tags(total_sum.for_what), length: 150 %>
+      </p>
+    </section>
+    <% if user_signed_in? %>
+      <%= link_to 'Edit', edit_total_sum_path(total_sum), class: 'btn btn-secodary' %>
+      <%= button_to 'Destroy', total_sum, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    </div>
+  </article>
   <% end %>
-  </tbody>
-</table>
+
 
 <br>
 <% if user_signed_in? %>

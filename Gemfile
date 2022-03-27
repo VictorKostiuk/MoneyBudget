@@ -17,6 +17,8 @@ gem 'sqlite3', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
+gem "turbo-rails"
+
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
@@ -59,6 +61,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 group :development do
   gem 'web-console'

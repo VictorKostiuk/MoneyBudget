@@ -49,7 +49,6 @@ RSpec.describe TotalSumsController, type: :controller do
 
     context 'Method show not successfully renders' do
       it 'assigns @teams' do
-
         get :show, params: { id: total_sums[1].id }
 
         expect(assigns['total_sum'].id).not_to eq(total_sums[0].id)
@@ -65,6 +64,7 @@ RSpec.describe TotalSumsController, type: :controller do
   describe 'PUT update' do
     context 'valid attributes' do
       let(:total_sum) { FactoryBot.create(:total_sum) }
+
       it 'assigns the requested total_sum to @total_sum' do
         patch :update, params: { total_sum: FactoryBot.attributes_for(:total_sum), id: total_sum.id }
         expect(assigns(:total_sum)).to eq total_sum
@@ -85,6 +85,7 @@ RSpec.describe TotalSumsController, type: :controller do
 
     context 'invalid attributes' do
       let(:total_sum) { FactoryBot.create(:total_sum) }
+
       it 'does not change total_sum attributes' do
         patch :update, params: { total_sum: { title: 'New', for_what: nil, count: 321 }, id: total_sum.id }
         total_sum.reload
@@ -100,27 +101,31 @@ RSpec.describe TotalSumsController, type: :controller do
   end
 
   describe 'POST create' do
-  context 'with valid attributes' do
-    it 'saves the new total_sum' do
-      expect { post :create, params: { total_sum: FactoryBot.attributes_for(:total_sum) } }.to change { TotalSum.count }.by(1)
+    context 'with valid attributes' do
+      it 'saves the new total_sum' do
+        expect do
+          post :create, params: { total_sum: FactoryBot.attributes_for(:total_sum) }
+        end.to change(TotalSum, :count).by(1)
+      end
+
+      it 'redirects to show view' do
+        post :create, params: { total_sum: FactoryBot.attributes_for(:total_sum) }
+        expect(response).to have_http_status(:ok)
+      end
     end
 
-    it 'redirects to show view' do
-      post :create, params: { total_sum: FactoryBot.attributes_for(:total_sum) }
-      expect(response).to have_http_status(:ok)
-    end
-  end
+    context 'with invalid attributes' do
+      it 'does not save the total_sum' do
+        expect do
+          post :create, params: { total_sum: FactoryBot.attributes_for(:invalid_total_sum) }
+        end.not_to change(TotalSum, :count)
+      end
 
-  context 'with invalid attributes' do
-    it 'does not save the total_sum' do
-      expect { post :create, params: { total_sum: FactoryBot.attributes_for(:invalid_total_sum) } }.to_not change { TotalSum.count }
+      it 're-renders new view' do
+        post :create, params: { total_sum: FactoryBot.attributes_for(:invalid_total_sum) }
+        expect(response).to render_template :new
+      end
     end
-
-    it 're-renders new view' do
-      post :create, params: { total_sum: FactoryBot.attributes_for(:invalid_total_sum) }
-      expect(response).to render_template :new
-    end
-  end
   end
 
   describe 'DELETE destroy' do
