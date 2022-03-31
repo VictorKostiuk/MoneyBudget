@@ -1,20 +1,35 @@
 <%= form_with(model: [@total_sum, @check]) do |form| %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :title %></strong>
+    </div>
+
+    <div class="col-sm-9">
+      <%= form.text_field :title, autocomplete: "Title", class: 'form-control form-control-lg'  %>
+    </div>
   </div>
   <br>
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body %>
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :body %></strong>
+    </div>
+
+    <div class="col-sm-9">
+      <%= form.text_field :body, autocomplete: "Body", class: 'form-control form-control-lg'  %>
+    </div>
   </div>
   <br>
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.number_field :cost %>
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :cost %></strong>
+    </div>
+
+    <div class="col-sm-9">
+      <%= form.number_field :cost, autocomplete: "Cost", class: 'form-control form-control-lg'  %>
+    </div>
   </div>
   <br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-secondary' %>
   </div>
 <% end %>

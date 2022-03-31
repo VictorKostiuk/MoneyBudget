@@ -11,27 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+  <div class="mb-3 mt-4 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :title %></strong>
+    </div>
 
-  <div class="field">
-    <%= form.label :for_what %>
-    <%= form.text_field :for_what %>
+    <div class="col-sm-9">
+      <%= form.text_field :title, autocomplete: "Title", class: 'form-control form-control-lg'  %>
+    </div>
   </div>
+  <br>
 
-  <div class="field">
-    <%= form.label :count %>
-    <%= form.number_field :count %>
-  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :for_what %></strong>
+    </div>
 
-  <div class="field">
-    <%= form.label :checks %>
-    <%= form.collection_select :checks_id, Check.all, :id, :title, prompt: true%>
+    <div class="col-sm-9">
+      <%= form.text_field :for_what, autocomplete: "For What", class: 'form-control form-control-lg'  %>
+    </div>
   </div>
+  <br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-secondary' %>
   </div>
 <% end %>

@@ -42,7 +42,7 @@ class TotalSumsController < ApplicationController
   private
 
   def total_sum_params
-    params.require(:total_sum).permit(:title, :for_what, :count, :checks_id)
+    params.require(:total_sum).permit(:title, :for_what, :total_count)
   end
 
   def set_total_sum!

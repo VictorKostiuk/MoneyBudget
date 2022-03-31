@@ -2,7 +2,7 @@
 
 class ChecksController < ApplicationController
   before_action :set_check, only: %i[show edit update destroy]
-  before_action :set_total_sum, only: %i[create]
+  before_action :set_total_sum, only: %i[create destroy]
 
   def index
     @checks = Check.all
@@ -31,7 +31,7 @@ class ChecksController < ApplicationController
 
   def destroy
     @check.destroy
-    redirect_to checks_path, status: :no_content
+    redirect_to total_sum_path(@total_sum)
   end
 
   private

@@ -3,5 +3,5 @@
 class TotalSum < ApplicationRecord
   validates :title, presence: true
   validates :for_what, presence: true
-  has_many :checks
+  has_many :checks, dependent: :destroy
 end

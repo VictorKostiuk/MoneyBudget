@@ -1,0 +1,7 @@
+<h2><strong><%= @check.title %></strong></h2>
+<h5><strong>Body:</strong>
+  <%= @check.body %></h5>
+<h5><strong>Cost:</strong>
+  <%= @check.cost %></h5>
+
+<%= link_to 'Back', total_sum_path(@check.total_sum_id), class: 'btn btn-secondary' %>
