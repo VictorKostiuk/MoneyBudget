@@ -19,7 +19,7 @@
     <h4>All checks</h4>
     <% @total_sum.checks.each do |check| %>
       <% if check.id != nil %>
-      <article class="card my-3">
+      <article class="card text-white bg-dark my-3">
         <section class="card-header">
           <h3><%= check.title %></h3>
         </section>
@@ -32,20 +32,19 @@
               <%= check.cost %>
             </small>
             <div class="button mt-3" style="display: flex;">
-
-                <%= link_to 'Show', total_sum_check_path(@total_sum, check), class: 'btn btn-secondary mx-1' %>
+              <%= link_to 'Show', total_sum_check_path(@total_sum, check), class: 'btn btn-dark ' %>
+              <% if user_signed_in? %>
                 <%= button_to 'Delete', total_sum_check_path(@total_sum, check),
-                              class: 'btn btn-danger btn-xs', method: :delete, confirm: 'Are you sure' %>
+                              class: 'btn btn-danger btn-xs mx-2', method: :delete, confirm: 'Are you sure' %>
+              <% end %>
             </div>
           </section>
         </div>
       </article>
       <% end %>
     <% end %>
-  <% else %>
-    <h4>There are no checks yet</h4>
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_total_sum_path(@total_sum), class: 'btn btn-secondary mx-1' %>
-<%= link_to 'Back', total_sums_path, class: 'btn btn-secondary' %>
+<%= link_to 'Edit', edit_total_sum_path(@total_sum), class: 'btn btn-dark mx-1' %>
+<%= link_to 'Back', total_sums_path, class: 'btn btn-dark' %>
