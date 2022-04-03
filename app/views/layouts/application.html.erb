@@ -23,7 +23,7 @@
             <ul class="navbar-nav">
               <% if user_signed_in? %>
                 <li><%= button_to "Sign out", destroy_user_session_path,
-                                  method: :delete, class:"btn btn-secondary" %></li>
+                                  method: :delete, class:"btn btn-dark" %></li>
               <% else %>
                 <li><%= link_to "Sign Up", new_user_registration_path,
                                 class: 'nav-link px-2' %>
@@ -42,7 +42,7 @@
       <% if alert %>
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
-    <div class="mx-5">
+    <div class="mx-5 mt-3">
       <%= yield %>
     </div>
   </body>

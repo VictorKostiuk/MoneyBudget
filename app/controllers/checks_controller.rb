@@ -37,7 +37,7 @@ class ChecksController < ApplicationController
   private
 
   def check_params
-    params.require(:check).permit(:title, :body, :cost, :total_sum_id)
+    params.require(:check).permit(:title, :body, :cost, :total_sum_id, :image)
   end
 
   def set_check
