@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class SetDeafoltForTotalSum < ActiveRecord::Migration[7.0]
   def self.up
-    change_column :total_sums, :count, :integer, :default => 0
+    change_column :total_sums, :count, :integer, default: 0
   end
 
   def self.down

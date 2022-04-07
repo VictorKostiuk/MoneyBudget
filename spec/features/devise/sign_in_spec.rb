@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'User sign in' do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   it 'Registered user try to sign in' do
     log_in(user)

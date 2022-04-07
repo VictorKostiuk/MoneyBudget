@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class TotalSum < ApplicationRecord
+class Account < ApplicationRecord
   validates :title, presence: true
   validates :for_what, presence: true
-  has_many :checks, dependent: :destroy
+  has_many :transactions, dependent: :destroy
 end

@@ -1,0 +1,14 @@
+<div class="show">
+  <h2><strong><%= @transaction.title %></strong></h2>
+  <h5><strong>Body:</strong>
+    <%= @transaction.body %></h5>
+  <h5><strong>Cost:</strong>
+    <%= @transaction.cost %></h5>
+  <% if @transaction.image.attached? %>
+    <h5><strong>Image:</strong></h5>
+    <div class="img-block">
+      <%= render 'transactions/modal' %>
+    </div>
+  <% end %>
+  <%= link_to 'Back', account_path(@transaction.account_id), class: 'btn btn-dark' %>
+</div>

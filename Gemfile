@@ -5,6 +5,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+gem 'simple_form'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 
@@ -17,8 +19,7 @@ gem 'sqlite3', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
-gem "turbo-rails"
-gem 'turbolinks', '~> 5.2.0'
+gem 'turbo-rails'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
@@ -54,15 +55,15 @@ gem 'devise'
 
 group :development, :test do
   gem 'capybara'
+  gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'pry-rails'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
-  gem 'shoulda-matchers', '~> 5.0'
   gem 'selenium-webdriver'
-  gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 group :development do
   gem 'web-console'

@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button"  class="mb-2" data-bs-toggle="modal" data-bs-target="#myModal">
-  <%= image_tag @check.image, style: "width: 100%; max-width: 200px"%>
+  <%= image_tag @transaction.image, style: "width: 100%; max-width: 200px"%>
 </button>
 
 <!-- Modal -->
@@ -8,11 +8,11 @@
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><%= @check.title.capitalize %> image:</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><%= @transaction.title.capitalize %> image:</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= image_tag @check.image, style: "width: 100%; height: 100%", class: 'mb-2'%>
+        <%= image_tag @transaction.image, style: "width: 100%; height: 100%", class: 'mb-2'%>
       </div>
     </div>
   </div>

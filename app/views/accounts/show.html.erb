@@ -1,0 +1,50 @@
+<h2><strong><%= @account.title %></strong></h2>
+
+<h5><strong>For What:</strong>
+  <%= @account.for_what %></h5>
+
+<h5>
+  <strong>Count:</strong>
+  <%= @account.transactions.map {|x| x.cost }.compact.sum %>
+</h5>
+<% if user_signed_in? %>
+<hr>
+<h4 class="mb-4">Add new transaction</h4>
+  <%= render 'transactions/form', account_id: @account.id %>
+<% end %>
+<hr>
+
+<div class="transactions">
+  <% if @account.transactions.compact != [] && @account.transactions.compact != nil %>
+    <h4>All transactions</h4>
+    <% @account.transactions.each do |transaction| %>
+      <% if transaction.id != nil %>
+      <article class="card text-white bg-dark my-3">
+        <section class="card-header">
+          <h3><%= transaction.title %></h3>
+        </section>
+        <div class="card-body">
+          <section class="card-text">
+            <p class="my-2">
+              <%= truncate strip_tags(transaction.body), length: 150 %>
+            </p>
+            <small>
+              <%= transaction.cost %>
+            </small>
+            <div class="button mt-3" style="display: flex;">
+              <%= link_to 'Show', account_transaction_path(@account, transaction), class: 'btn btn-dark ' %>
+              <% if user_signed_in? %>
+                <%= button_to 'Delete', account_transaction_path(@account, transaction),
+                              class: 'btn btn-danger btn-xs mx-2', method: :delete, confirm: 'Are you sure' %>
+              <% end %>
+            </div>
+          </section>
+        </div>
+      </article>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-dark mx-1' %>
+<%= link_to 'Back', accounts_path, class: 'btn btn-dark' %>

@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :total_sum do
+  factory :account do
     title { 'default' }
     for_what { 'for_that' }
-    count { 123 }
+    total_count { 123 }
   end
-  factory :invalid_total_sum, class: 'TotalSum' do
+  factory :invalid_account, class: 'Account' do
     title { nil }
     for_what { nil }
-    count { nil }
+    total_count { nil }
   end
 end

@@ -2,10 +2,10 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  resources :checks
-  resources :total_sums do
-    resources :checks
+  resources :transactions
+  resources :accounts do
+    resources :transactions
   end
 
-  root 'total_sums#index'
+  root 'accounts#index'
 end

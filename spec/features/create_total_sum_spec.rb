@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'User creates a total_sum', driver: :selenium_chrome do
-  let(:total_sum) { FactoryBot.create(:total_sum) }
+  let(:total_sum) { create(:total_sum) }
 
   it 'Registered user try create total_sum' do
     sign_up
