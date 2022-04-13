@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_406_122_735) do
+ActiveRecord::Schema[7.0].define(version: 20_220_411_182_322) do
   create_table 'accounts', force: :cascade do |t|
     t.string 'title'
     t.text 'for_what'
@@ -85,4 +85,5 @@ ActiveRecord::Schema[7.0].define(version: 20_220_406_122_735) do
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'transactions', 'accounts'
+  add_foreign_key 'transactions', 'categories'
 end

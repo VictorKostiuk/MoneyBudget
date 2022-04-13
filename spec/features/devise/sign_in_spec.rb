@@ -6,7 +6,7 @@ RSpec.describe 'User sign in' do
   it 'Registered user try to sign in' do
     log_in(user)
 
-    expect(page).to have_content 'Signed in successfully'
+    expect(page).to have_content 'Sign out'
     expect(page).to have_current_path root_path, ignore_query: true
   end
 
@@ -14,7 +14,7 @@ RSpec.describe 'User sign in' do
     visit new_user_session_path
     fill_in 'Email', with: 'user@test.com'
     fill_in 'Password', with: user.password
-    click_on 'Log in'
+    click_on 'Log in', class: 'btn btn-dark'
 
     expect(page).to have_content 'Invalid Email or password.'
     expect(page).to have_current_path new_user_session_path, ignore_query: true

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :set_total_sum, only: %i[create destroy]
+  before_action :set_category, only: %i[show update edit destroy]
 
   def index
     @categories = Category.all
@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.create category_params
     if @category.save
-      redirect_to accounts_path(@category), status: :ok
+      redirect_to categories_path(@category), status: :ok
     else
       render :new
     end
@@ -26,7 +26,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update category_params
-      redirect_to category_path(@category), status: :ok
+      redirect_to categories_path, status: :ok
     else
       render :edit
     end

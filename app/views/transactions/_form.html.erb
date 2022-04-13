@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-sm-9">
-      <%= form.text_field :title, autocomplete: "Title", class: 'form-control form-control-lg'  %>
+      <%= form.text_field :title, autocomplete: "Title", class: 'form-control form-control-lg shadow-lg bg-body rounded' %>
     </div>
   </div>
   <br>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="col-sm-9">
-      <%= form.text_field :body, autocomplete: "Body", class: 'form-control form-control-lg'  %>
+      <%= form.text_field :body, autocomplete: "Body", class: 'form-control form-control-lg  shadow-lg bg-body rounded ' %>
     </div>
   </div>
   <br>
@@ -25,14 +25,23 @@
     </div>
 
     <div class="col-sm-9">
-      <%= form.number_field :cost, autocomplete: "Cost", class: 'form-control form-control-lg'  %>
+      <%= form.number_field :cost, autocomplete: "Cost", class: 'form-control form-control-lg  shadow-lg bg-body rounded '  %>
     </div>
   </div>
   <br>
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :category %></strong>
+    </div>
 
+    <div class="col-sm-9">
+      <%= form.collection_select :category_id, Category.all, :id, :name, {}, class: 'form-control form-control-lg shadow-lg bg-body rounded '   %>
+    </div>
+  </div>
+  <br>
   <div class="form-group">
     <% if @transaction.image.attached? %>
-      <%= image_tag @transaction.image, style: "width: 200px; display: block" %>
+      <%= image_tag @transaction.image, style: "width: 200px; display: block " %>
     <% end %>
     <div class="mb-3 row">
       <div class="col-sm-1 col-form-label">
@@ -40,7 +49,7 @@
       </div>
 
       <div class="col-sm-9">
-        <%= form.file_field :image, autocomplete: "Cost", class: 'form-control form-control-lg'  %>
+        <%= form.file_field :image, autocomplete: "Cost", class: 'form-control form-control-lg  shadow-lg bg-body rounded '  %>
       </div>
     </div>
     <br>
