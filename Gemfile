@@ -15,8 +15,8 @@ gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'sprockets-rails'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-
+# gem 'sqlite3', '~> 1.4'
+gem 'pg'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 gem 'turbo-rails'
