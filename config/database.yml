@@ -1,4 +1,4 @@
-development:
+development:DISABLE_DATABASE_ENVIRONMENT_CHECK=1
   adapter: postgresql
   database: db/development.sqlite3
   pool: 5
@@ -12,6 +12,6 @@ test:
 
 production:
   adapter: postgresql
-  database: db/production.sqlite3
+  database: db/production.postgresql
   pool: 5
   timeout: 5000
