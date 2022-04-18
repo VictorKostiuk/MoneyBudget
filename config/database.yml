@@ -1,16 +1,19 @@
-default: &default
+development:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
   timeout: 5000
-
-development:DISABLE_DATABASE_ENVIRONMENT_CHECK=1
-  <<: *default
-  database: my_app_development
+  database: db/development.sqlite3
 
 test:
-  <<: *default
-  database: my_app_test
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
+  timeout: 5000
+  database: db/test.sqlite3
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
+  timeout: 5000
