@@ -23,7 +23,7 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update transaction_params
-      redirect_to transaction_path(@transaction), status: :ok
+      redirect_back fallback_location: root_path, status: :ok
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image)
+    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id)
   end
 
   def set_transaction

@@ -19,6 +19,8 @@
           <ul class="navbar-nav">
             <li><%= link_to 'Accounts', root_path,
                             class: 'nav-link px-2' %></li>
+            <li><%= link_to 'Categories', categories_path,
+                            class: 'nav-link px-2' %></li>
           </ul>
 
           <ul class="navbar-nav">
@@ -45,7 +47,7 @@
       <% if alert %>
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
-    <div class="mx-5 mt-3">
+    <div class="container mt-4">
       <%= yield %>
     </div>
   </body>

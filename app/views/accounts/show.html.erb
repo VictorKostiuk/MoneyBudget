@@ -14,37 +14,56 @@
 <% end %>
 <hr>
 
-<div class="transactions">
+<% if user_signed_in? %>
+  <%= link_to 'New Category', new_category_path, class: 'btn btn-dark mb-3' %>
+  <%= link_to 'All Categories', categories_path, class: 'btn btn-dark mb-3' %>
+<% end %>
+
+<div class="transactions row" >
   <% if @account.transactions.compact != [] && @account.transactions.compact != nil %>
     <h4>All transactions</h4>
     <% @account.transactions.each do |transaction| %>
       <% if transaction.id != nil %>
-      <article class="card text-white bg-dark my-3">
-        <section class="card-header">
-          <h3><%= transaction.title %></h3>
-        </section>
-        <div class="card-body">
-          <section class="card-text">
-            <p class="my-2">
-              <%= truncate strip_tags(transaction.body), length: 150 %>
-            </p>
-            <small>
-              <%= transaction.cost %>
-            </small>
-            <div class="button mt-3" style="display: flex;">
-              <%= link_to 'Show', account_transaction_path(@account, transaction), class: 'btn btn-dark ' %>
+        <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3" style="width: 18rem;">
+          <% if transaction.image.present? %>
+            <%= image_tag transaction.image, style: "height: 175px", class: "card-img-top" %>
+          <% else %>
+            <%= image_tag("image.svg", :alt => "rss feed", style: "width: 100%; max-width: 200px; height: 175px",
+                          class: "card-img-top") %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= transaction.title.capitalize %></h5>
+            <p class="card-subtitle lh-1 mb-1"><%= truncate strip_tags(transaction.body.capitalize) %></p>
+            <% if transaction.category != nil %>
+              <p class="card-text"><b>Category:</b> <%= transaction.category.name %></p>
+            <% else %>
+              <p class="card-text"><strong>Category is not selected</strong></p>
+            <% end %>
+            <p class="card-text"><b>Cost:</b> <%= transaction.cost %></p>
+            <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%H:%M:%S %Y/%m/%d') %></p>
+
+            <div class="button" style="display: flex;">
+              <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-dark mx-2 ' %>
               <% if user_signed_in? %>
+                <%= link_to 'Edit', edit_transaction_path(transaction), class: 'btn btn-dark' %>
                 <%= button_to 'Delete', account_transaction_path(@account, transaction),
                               class: 'btn btn-danger btn-xs mx-2', method: :delete, confirm: 'Are you sure' %>
               <% end %>
             </div>
-          </section>
+          </div>
         </div>
-      </article>
       <% end %>
     <% end %>
   <% end %>
+
+</div>
+<div class="d-grid gap-2 mx-auto d-flex justify-content-center">
+  <% if user_signed_in? %>
+    <%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-dark mx-1 mb-3 col-6' %>
+    <%= link_to 'Back', accounts_path, class: 'btn btn-dark mb-3  col-6', type: 'button' %>
+  <% else %>
+    <%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-dark mx-1 mb-3 disabled col-6', type: 'button'  %>
+    <%= link_to 'Back', accounts_path, class: 'btn btn-dark mb-3  col-6', type: 'button' %>
+  <% end %>
 </div>
 
-<%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-dark mx-1' %>
-<%= link_to 'Back', accounts_path, class: 'btn btn-dark' %>

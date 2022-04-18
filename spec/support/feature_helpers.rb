@@ -5,9 +5,7 @@ module FeatureHelpers
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    within("body") do
-      click_link "Log in"
-    end
+    click_on 'Log in', class: 'btn btn-dark'
   end
 
   def sign_up
@@ -19,11 +17,10 @@ module FeatureHelpers
   end
 
   def create_account
-    click_on 'New Total Sum'
+    click_on 'New Account'
     fill_in 'Title', with: 'test'
     fill_in 'For what', with: 'test1'
-    fill_in 'Count', with: 12
-    click_on 'Create Total sum'
+    click_on 'Create Account'
   end
 
   def create_transaction
@@ -31,5 +28,14 @@ module FeatureHelpers
     fill_in 'Body', with: 'test1'
     fill_in 'Cost', with: 12
     click_on 'Create Transaction'
+  end
+
+  def create_category
+    fill_in 'Name', with: 'test1'
+    fill_in 'Description', with: 'About that'
+    click_on 'Create Category'
+
+    sleep 1
+    expect(Category.count).to eql 1
   end
 end
