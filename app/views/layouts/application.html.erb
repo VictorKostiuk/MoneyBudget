@@ -21,6 +21,8 @@
                             class: 'nav-link px-2' %></li>
             <li><%= link_to 'Categories', categories_path,
                             class: 'nav-link px-2' %></li>
+            <li><%= link_to 'Transactions', transactions_path,
+                            class: 'nav-link px-2' %></li>
           </ul>
 
           <ul class="navbar-nav">
@@ -48,7 +50,7 @@
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
     <div class="container mt-4">
-      <%= yield %>
+        <%= yield %>
     </div>
   </body>
 </html>

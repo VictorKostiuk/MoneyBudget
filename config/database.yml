@@ -3,14 +3,14 @@ development:
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
   timeout: 5000
-  database: db/development.sqlite3
+  database: development
 
 test:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
   timeout: 5000
-  database: db/test.sqlite3
+  database: test
 
 production:
   adapter: postgresql

@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <h1>Categories</h1>
 
 
@@ -16,4 +17,7 @@
 <br>
 <% if user_signed_in? %>
 <%= link_to 'New category', new_category_path, class: 'btn btn-dark' %>
+<% end %>
+<% else %>
+  <h3><strong>You are not singed in yet.</strong></h3>
 <% end %>

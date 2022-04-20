@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
   private
 
   def total_sum_params
-    params.require(:account).permit(:title, :for_what, :total_count)
+    params.require(:account).permit(:title, :for_what, :total_count).merge(user_id: current_user.id)
   end
 
   def set_total_sum!

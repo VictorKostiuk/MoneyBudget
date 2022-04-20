@@ -1,4 +1,5 @@
-<div class="show">
+<% if user_signed_in? %>
+  <div class="show">
   <h2><strong><%= @transaction.title %></strong></h2>
   <h5><strong>Body:</strong>
     <%= @transaction.body %></h5>
@@ -19,3 +20,6 @@
 
   <%= link_to 'Back', account_path(@transaction.account_id), class: 'btn btn-dark mt-2' %>
 </div>
+<% else %>
+  <h3><strong>You are not singed in yet.</strong></h3>
+<% end %>

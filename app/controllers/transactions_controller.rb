@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id)
+    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id).merge(user_id: current_user.id)
   end
 
   def set_transaction
