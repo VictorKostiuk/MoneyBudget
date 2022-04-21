@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.create(total_sum_params.merge(user_id: current_user))
+    @account = current_user.accounts.build total_sum_params
     if @account.save
       redirect_to accounts_path(@account), status: :ok
     else

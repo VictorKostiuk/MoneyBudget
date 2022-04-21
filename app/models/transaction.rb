@@ -5,4 +5,5 @@ class Transaction < ApplicationRecord
   validates :body, presence: true
   has_one_attached :image, dependent: :destroy
   belongs_to :category
+  belongs_to :user
 end

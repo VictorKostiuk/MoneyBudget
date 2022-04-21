@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   before_action :set_account, only: %i[create destroy]
 
   def index
-    @transactions = Transaction.find
+    @transactions = Transaction.all
   end
 
   def edit; end
@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
   def show; end
 
   def create
-    @transaction = @account.transactions.build(transaction_params.merge(user_id: current_user))
+    @transaction = @account.transactions.build transaction_params
     if @transaction.save
       redirect_to account_path(@account), status: :ok
     else
