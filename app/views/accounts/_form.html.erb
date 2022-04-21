@@ -1,11 +1,9 @@
 <%= form_with(model: @account, local: true) do |form| %>
-  <% if @account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this todo from being saved:</h2>
-
-      <ul>
-        <% @account.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+  <% if @account&.errors&.full_messages&.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @account.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>

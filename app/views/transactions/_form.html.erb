@@ -1,4 +1,14 @@
 <%= form_with(model: [@account, @transaction]) do |form| %>
+  <% if @transaction&.errors&.full_messages&.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="mb-3 row">
     <div class="col-sm-1 col-form-label">
       <strong><%= form.label :title %></strong>
@@ -29,6 +39,19 @@
     </div>
   </div>
   <br>
+
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :date_of_creating %></strong>
+    </div>
+
+    <div class="col-sm-9">
+      <%= form.number_field :date_of_creating, type: "date", id: "start",
+          min: "2018-01-01", max: "2022-12-31", class: 'form-control form-control-lg  shadow-lg bg-body rounded '  %>
+    </div>
+  </div>
+  <br>
+
   <div class="mb-3 row">
     <div class="col-sm-1 col-form-label">
       <strong><%= form.label :category %></strong>

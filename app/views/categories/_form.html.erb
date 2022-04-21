@@ -1,11 +1,9 @@
 <%= form_with(model: @category, local: true) do |form| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this todo from being saved:</h2>
-
-      <ul>
-        <% @category.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+  <% if @category&.errors&.full_messages&.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @category&.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
