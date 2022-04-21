@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
   def show; end
 
   def create
-    @transaction = @account.transactions.build(transaction_params.merge(user_id: current_user))
+    @transaction = @account.transactions.build transaction_params
     if @transaction.save
       redirect_to account_path(@account), status: :ok
     else
@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id)
+    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id).merge(user_id: current_user.id)
   end
 
   def set_transaction
