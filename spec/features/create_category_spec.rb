@@ -5,7 +5,7 @@ RSpec.describe 'User creates a category', driver: :selenium_chrome do
     sign_up
     create_account
     visit accounts_path
-    click_on "test"
+    click_on 'test'
     click_on 'New Category'
     create_category
     visit categories_path

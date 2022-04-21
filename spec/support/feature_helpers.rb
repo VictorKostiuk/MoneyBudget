@@ -36,6 +36,6 @@ module FeatureHelpers
     click_on 'Create Category'
 
     sleep 1
-    expect(Category.count).to eql 1
+    expect(Category.count).to be 1
   end
 end

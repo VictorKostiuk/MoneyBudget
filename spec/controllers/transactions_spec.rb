@@ -117,7 +117,8 @@ RSpec.describe TransactionsController, type: :controller do
     context 'with valid attributes' do
       it 'saves the new transaction' do
         expect do
-          post :create, params: { transaction: attributes_for(:transaction, category_id: category.id), account_id: account.id }
+          post :create,
+               params: { transaction: attributes_for(:transaction, category_id: category.id), account_id: account.id }
         end.to change(Transaction, :count).by(1)
       end
 
@@ -152,7 +153,9 @@ RSpec.describe TransactionsController, type: :controller do
     let!(:transaction) { create(:transaction, account_id: account.id, category_id: category.id) }
 
     it 'assigns @teams' do
-      expect { delete :destroy, params: { id: transaction.id, account_id: account.id } }.to change(Transaction, :count).by(-1)
+      expect do
+        delete :destroy, params: { id: transaction.id, account_id: account.id }
+      end.to change(Transaction, :count).by(-1)
     end
   end
 end
