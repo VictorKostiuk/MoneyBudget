@@ -26,7 +26,15 @@
       <% if transaction.id != nil %>
         <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3" style="width: 18rem;">
           <% if transaction.image.present? %>
-            <%= image_tag transaction.image, style: "height: 175px", class: "card-img-top" %>
+            <% if transaction.image.previewable? %>
+              <%= image_tag transaction.image.preview(
+                  resize_to_fit: [500, 500]
+                  ) %>
+            <% elsif transaction.image.variable? %>
+              <%= image_tag transaction.image.variant(
+                resize_to_fit: [500, 500]
+              ) %>
+            <% end %>
           <% else %>
             <%= image_tag("image.svg", :alt => "rss feed", style: "width: 100%; max-width: 200px; height: 175px",
                           class: "card-img-top") %>

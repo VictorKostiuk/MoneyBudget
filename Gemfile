@@ -14,10 +14,12 @@ gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'sprockets-rails'
-
 gem 'puma', '~> 5.0'
 gem 'turbo-rails'
 
+gem 'poppler'
+gem 'streamio-ffmpeg'
+gem 'image_processing', '~> 1.2'
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 

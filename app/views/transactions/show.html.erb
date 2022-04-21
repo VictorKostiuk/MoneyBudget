@@ -8,7 +8,12 @@
   <% if @transaction.image.attached? %>
     <h5><strong>Image:</strong></h5>
     <div class="img-block">
-      <%= render 'transactions/modal' %>
+      <% if @transaction.image.previewable? %>
+        <%= link_to(image_tag(@transaction.image.preview(resize_to_fit: [500, 500] ),class: 'img'), rails_blob_url(@transaction.image),  :method => :get) %>
+      <% elsif @transaction.image.variable? %>
+        <%= render 'transactions/modal' %>
+      <% end %>
+
     </div>
   <% end %>
 
