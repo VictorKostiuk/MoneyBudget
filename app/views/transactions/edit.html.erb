@@ -1,9 +1,5 @@
-<% if user_signed_in? %>
 <h1>Editing transaction</h1>
 
 <%= render 'transactions/form' %>
 
 <%= link_to 'Back', account_path(@transaction.account_id), class: 'btn btn-dark mt-2' %>
-<% else %>
-  <h3><strong>You are not singed in yet.</strong></h3>
-<% end %>

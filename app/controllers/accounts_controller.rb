@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.create total_sum_params
+    @account = Account.create(total_sum_params.merge(user_id: current_user))
     if @account.save
       redirect_to accounts_path(@account), status: :ok
     else
@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
   private
 
   def total_sum_params
-    params.require(:account).permit(:title, :for_what, :total_count).merge(user_id: current_user.id)
+    params.require(:account).permit(:title, :for_what, :total_count)
   end
 
   def set_total_sum!
