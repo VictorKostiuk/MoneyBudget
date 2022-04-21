@@ -1,14 +1,9 @@
 <div class="show">
   <h2><strong><%= @transaction.title %></strong></h2>
-  <h5><strong>Body:</strong>
-    <%= @transaction.body %></h5>
-  <h5><strong>Cost:</strong>
-    <%= @transaction.cost %></h5>
+  <h5><strong>Body:</strong> <%= @transaction.body %></h5>
+  <h5><strong>Cost:</strong> <%= @transaction.cost %></h5>
     <% if @transaction.category != nil %>
-        <h5><strong>Category:</strong>
-        <%= @transaction.category.name %></h5>
-      <% else %>
-        <h5><strong>Category is not selected</strong></h5>
+        <h5><strong>Category:</strong> <%= @transaction.category.name %></h5>
     <% end %>
   <% if @transaction.image.attached? %>
     <h5><strong>Image:</strong></h5>

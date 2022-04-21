@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.0.4'
 
 gem 'simple_form'
 
@@ -14,10 +14,7 @@ gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'sprockets-rails'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
 
-# Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 gem 'turbo-rails'
 
@@ -74,4 +71,8 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'rubocop-rspec', require: false
+end
+
+group :production do
+  gem 'pg'
 end

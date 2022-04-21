@@ -3,13 +3,13 @@
 
   <% @categories.each do |category| %>
     <hr>
-  <div style="display: flex;" class="mt-3">
+    <div style="display: flex;" class="mt-3">
       <h3><%= link_to category.name, category_path(category), class: 'text-dark', style: "text-decoration: none;" %></h3>
-    <% if user_signed_in? %>
-      <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-dark mx-2' %>
-      <%= button_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-    <% end %>
-      </div>
+      <% if user_signed_in? %>
+        <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-dark mx-2' %>
+        <%= button_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <% end %>
+    </div>
   <% end %>
 
 

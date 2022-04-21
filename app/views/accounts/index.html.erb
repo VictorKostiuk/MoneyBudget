@@ -2,6 +2,8 @@
 
 <div class="accounts">
   <% @accounts.each do |account| %>
+    <% if account.user_id != current_user.id %>
+      <% else %>
     <article class="card text-white bg-dark my-3">
       <section class="card-header">
         <h3><%= link_to account.title, account_path(account), class: 'text-white', style: "text-decoration: none;" %></h3>
@@ -20,11 +22,10 @@
         </div>
       </div>
     </article>
+    <% end %>
   <% end %>
-
 </div>
-
 <br>
-<% if user_signed_in? %>
+
 <%= link_to 'New Account', new_account_path, class: 'btn btn-dark' %>
-<% end %>
+
