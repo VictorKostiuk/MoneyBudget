@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
   def show; end
 
   def create
-    @transaction = @account.transactions.build transaction_params
+    @transaction = @account.transactions.build(transaction_params.merge(user_id: current_user))
     if @transaction.save
       redirect_to account_path(@account), status: :ok
     else
