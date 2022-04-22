@@ -4,3 +4,5 @@ libglib2.0-dev
 libtiff5-dev
 libjpeg-turbo8-dev
 libgsf-1-dev
+libssl-dev
+libcrypto++-dev
