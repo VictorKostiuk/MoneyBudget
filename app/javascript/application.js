@@ -6,3 +6,4 @@
 import * as bootstrap from "bootstrap"
 
 var myModal = new bootstrap.Modal(document.getElementById('myModal'))
+var mySecondModal = new bootstrap.Modal(document.getElementById('mySecondModal'))

@@ -9,8 +9,7 @@
 </h5>
 <% if user_signed_in? %>
 <hr>
-<h4 class="mb-4">Add new transaction</h4>
-  <%= render 'transactions/form', account_id: @account.id %>
+  <%= render 'accounts/modal', account_id: @account.id %>
 <% end %>
 <hr>
 
@@ -36,8 +35,6 @@
             <p class="card-subtitle lh-1 mb-1"><%= truncate strip_tags(transaction.body.capitalize) %></p>
             <% if transaction.category != nil %>
               <p class="card-text"><b>Category:</b> <%= transaction.category.name %></p>
-            <% else %>
-              <p class="card-text"><strong>Category is not selected</strong></p>
             <% end %>
             <p class="card-text"><b>Cost:</b> <%= transaction.cost %></p>
             <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%H:%M:%S %Y/%m/%d') %></p>
