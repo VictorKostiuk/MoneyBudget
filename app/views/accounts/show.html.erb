@@ -43,7 +43,7 @@
               <p class="card-text"><b>Category:</b> <%= transaction.category.name %></p>
             <% end %>
             <p class="card-text"><b>Cost:</b> <%= transaction.cost %></p>
-            <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%H:%M:%S %d/%m/%Y') %></p>
+            <p class="small"><b>Date of creating:</b> <%= transaction.date_of_creating.strftime('%Y/%m/%d') %></p>
 
             <div class="button" style="display: flex;">
               <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-dark mx-2 ' %>
