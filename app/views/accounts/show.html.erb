@@ -24,20 +24,18 @@
     <h4>All transactions</h4>
     <% @account.transactions.each do |transaction| %>
       <% if transaction.id != nil %>
-        <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3" style="width: 18rem;">
+        <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3 karta">
           <% if transaction.image.present? %>
             <% if transaction.image.previewable? %>
               <%= image_tag transaction.image.preview(
-                  resize_to_fit: [500, 500]
+                  resize_to_fit: [200, 175]
                   ) %>
             <% elsif transaction.image.variable? %>
-              <%= image_tag transaction.image.variant(
-                resize_to_fit: [500, 500]
-              ) %>
+              <%= image_tag transaction.image %>
             <% end %>
           <% else %>
-            <%= image_tag("image.svg", :alt => "rss feed", style: "width: 100%; max-width: 200px; height: 175px",
-                          class: "card-img-top") %>
+            <%= image_tag("image.svg", :alt => "rss feed",
+                          class: "card-img-top kard-image") %>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= transaction.title.capitalize %></h5>
@@ -48,7 +46,7 @@
               <p class="card-text"><strong>Category is not selected</strong></p>
             <% end %>
             <p class="card-text"><b>Cost:</b> <%= transaction.cost %></p>
-            <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%H:%M:%S %Y/%m/%d') %></p>
+            <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%H:%M:%S %d/%m/%Y') %></p>
 
             <div class="button" style="display: flex;">
               <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-dark mx-2 ' %>
