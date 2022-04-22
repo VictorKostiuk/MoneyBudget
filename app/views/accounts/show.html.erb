@@ -24,7 +24,7 @@
     <h4>All transactions</h4>
     <% @account.transactions.each do |transaction| %>
       <% if transaction.id != nil %>
-        <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3 karta">
+        <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3 card-width">
           <% if transaction.image.present? %>
             <% if transaction.image.previewable? %>
               <%= image_tag transaction.image.preview(
@@ -35,7 +35,7 @@
             <% end %>
           <% else %>
             <%= image_tag("image.svg", :alt => "rss feed",
-                          class: "card-img-top kard-image") %>
+                          class: "card-img-top card-image") %>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= transaction.title.capitalize %></h5>
