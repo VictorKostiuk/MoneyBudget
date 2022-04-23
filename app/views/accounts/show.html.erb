@@ -43,9 +43,12 @@
               <p class="card-text"><b>Category:</b> <%= transaction.category.name %></p>
             <% end %>
             <p class="card-text"><b>Cost:</b> <%= transaction.cost %></p>
-            <p class="small"><b>Date of creating:</b> <%= transaction.date_of_creating.strftime('%Y/%m/%d') %></p>
-
-            <div class="button" style="display: flex;">
+            <% if transaction.date_of_creating != nil %>
+              <p class="small"><b>Date of creating:</b> <%= transaction.date_of_creating.strftime('%Y/%m/%d') %></p>
+            <% else %>
+              <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%Y/%m/%d') %></p>
+            <% end %>
+            <div class="d-flex button">
               <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-dark mx-2 ' %>
               <% if user_signed_in? %>
                 <%= link_to 'Edit', edit_transaction_path(transaction), class: 'btn btn-dark' %>
