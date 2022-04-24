@@ -3,11 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe TransactionsController, type: :controller do
-  let(:account) { create(:account) }
+  let(:user) { create(:user) }
+  let(:account) { create(:account, user_id: user.id) }
   let(:category) { create(:category) }
 
+  before do
+    sign_in(user)
+  end
+
   describe 'GET #index' do
-    let(:transactions) { create_list(:transaction, 2, account_id: account.id, category_id: category.id) }
+
+    let(:transactions) { create_list(:transaction, 2, account_id: account.id, category_id: category.id, user_id: user.id) }
 
     context 'Index successfully renders' do
       before do
@@ -15,7 +21,7 @@ RSpec.describe TransactionsController, type: :controller do
       end
 
       it 'populates an array of all transactions' do
-        expect(assigns(:transactions)).to match_array(transactions)
+        expect(assigns(:transactions)).to match_array(transactions.to_a)
       end
 
       it 'renders index view' do
@@ -35,8 +41,9 @@ RSpec.describe TransactionsController, type: :controller do
   end
 
   describe 'GET show' do
-    let(:account) { create(:account) }
-    let(:transactions) { create_list(:transaction, 2, account_id: account.id, category_id: category.id) }
+    let(:user) { create(:user) }
+    let(:account) { create(:account, user_id: user.id) }
+    let(:transactions) { create_list(:transaction, 2, account_id: account.id, category_id: category.id, user_id: user.id) }
 
     context 'Method show successfully renders' do
       it 'assigns @teams' do
@@ -68,10 +75,11 @@ RSpec.describe TransactionsController, type: :controller do
   end
 
   describe 'PUT update' do
-    let(:account) { create(:account) }
+    let(:user) { create(:user) }
+    let(:account) { create(:account, user_id: user.id) }
 
     context 'valid attributes' do
-      let(:transaction) { create(:transaction, account_id: account.id, category_id: category.id) }
+      let(:transaction) { create(:transaction, account_id: account.id, category_id: category.id, user_id: user.id) }
 
       it 'assigns the requested transaction to @transaction' do
         patch :update, params: { transaction: attributes_for(:transaction), id: transaction.id }
@@ -80,7 +88,7 @@ RSpec.describe TransactionsController, type: :controller do
 
       it 'changes transaction attributes' do
         patch :update,
-              params: { transaction: { title: 'New', body: 'News', cost: 321 }, account_id: account.id,
+              params: { transaction: { title: 'New', body: 'News', cost: 321 }, account_id: account.id, user_id: user.id,
                         id: transaction.id }
         transaction.reload
         expect(transaction.title).to eq 'New'
@@ -94,7 +102,7 @@ RSpec.describe TransactionsController, type: :controller do
     end
 
     context 'invalid attributes' do
-      let(:transaction) { create(:transaction, account_id: account.id, category_id: category.id) }
+      let(:transaction) { create(:transaction, account_id: account.id, category_id: category.id, user_id: user.id) }
 
       it 'does not change transaction attributes' do
         patch :update, params: { transaction: { title: 'New', body: nil, cost: 321 }, id: transaction.id }
@@ -111,19 +119,20 @@ RSpec.describe TransactionsController, type: :controller do
   end
 
   describe 'POST create' do
-    let!(:account) { create(:account) }
+    let(:user) { create(:user) }
+    let!(:account) { create(:account, user_id: user.id) }
     let!(:category) { create(:category) }
 
     context 'with valid attributes' do
       it 'saves the new transaction' do
         expect do
-          post :create, params: { transaction: attributes_for(:transaction, category_id: category.id), account_id: account.id }
+          post :create, params: { transaction: attributes_for(:transaction, category_id: category.id), account_id: account.id, user_id: user.id }
         end.to change(Transaction, :count).by(1)
       end
 
       it 'redirects to show view' do
         post :create,
-             params: { transaction: attributes_for(:transaction), account_id: account.id, category_id: category.id }
+             params: { transaction: attributes_for(:transaction), account_id: account.id, category_id: category.id, user_id: user.id }
         expect(response).to have_http_status(:ok)
       end
     end
@@ -132,14 +141,14 @@ RSpec.describe TransactionsController, type: :controller do
       it 'does not save the transaction' do
         expect do
           post :create,
-               params: { transaction: attributes_for(:invalid_transaction), account_id: account.id,
+               params: { transaction: attributes_for(:invalid_transaction), account_id: account.id, user_id: user.id,
                          category_id: category.id }
         end.not_to change(Transaction, :count)
       end
 
       it 're-renders new view' do
         post :create,
-             params: { transaction: attributes_for(:invalid_transaction), account_id: account.id,
+             params: { transaction: attributes_for(:invalid_transaction), account_id: account.id, user_id: user.id,
                        category_id: category.id }
         expect(response).to render_template 'accounts/show'
       end
@@ -147,12 +156,13 @@ RSpec.describe TransactionsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
-    let(:account) { create(:account) }
+    let(:user) { create(:user) }
+    let(:account) { create(:account, user_id: user.id) }
     let(:category) { create(:category) }
-    let!(:transaction) { create(:transaction, account_id: account.id, category_id: category.id) }
+    let!(:transaction) { create(:transaction, account_id: account.id, category_id: category.id, user_id: user.id) }
 
     it 'assigns @teams' do
-      expect { delete :destroy, params: { id: transaction.id, account_id: account.id } }.to change(Transaction, :count).by(-1)
+      expect { delete :destroy, params: { id: transaction.id, account_id: account.id, user_id: user.id } }.to change(Transaction, :count).by(-1)
     end
   end
 end

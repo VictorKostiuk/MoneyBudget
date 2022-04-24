@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe AccountsController, type: :controller do
+  let(:user) { create(:user) }
+
+  before do
+    sign_in(user)
+  end
+
   describe 'GET #index' do
-    let(:accounts) { create_list(:account, 2) }
+    let(:accounts) { create_list(:account, 2, user_id: user.id) }
 
     context 'Index successfully renders' do
       before do
@@ -30,7 +36,7 @@ RSpec.describe AccountsController, type: :controller do
   end
 
   describe 'GET show' do
-    let(:accounts) { create_list(:account, 2) }
+    let(:accounts) { create_list(:account, 2, user_id: user.id) }
 
     context 'Method show successfully renders' do
       it 'assigns @teams' do
@@ -63,7 +69,7 @@ RSpec.describe AccountsController, type: :controller do
 
   describe 'PUT update' do
     context 'valid attributes' do
-      let(:account) { create(:account) }
+      let(:account) { create(:account, user_id: user.id) }
 
       it 'assigns the requested account to @account' do
         patch :update, params: { account: attributes_for(:account), id: account.id }
@@ -84,7 +90,7 @@ RSpec.describe AccountsController, type: :controller do
     end
 
     context 'invalid attributes' do
-      let(:account) { create(:account) }
+      let(:account) { create(:account, user_id: user.id) }
 
       it 'does not change account attributes' do
         patch :update, params: { account: { title: 'New', for_what: nil, total_count: 321 }, id: account.id }
@@ -129,7 +135,7 @@ RSpec.describe AccountsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
-    let!(:account) { create(:account) }
+    let!(:account) { create(:account, user_id: user.id) }
 
     it 'assigns @teams' do
       expect { delete :destroy, params: { id: account.id } }.to change(Account, :count).by(-1)

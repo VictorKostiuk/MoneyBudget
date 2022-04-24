@@ -3,10 +3,8 @@
 RSpec.describe 'User creates a category', driver: :selenium_chrome do
   it 'Registered user creates check' do
     sign_up
-    create_account
-    visit accounts_path
-    click_on "test"
-    click_on 'New Category'
+    visit categories_path
+    click_on 'New category'
     create_category
     visit categories_path
 
@@ -15,8 +13,7 @@ RSpec.describe 'User creates a category', driver: :selenium_chrome do
 
   it 'Non-registered user try create check' do
     visit accounts_path
-    click_on 'test'
 
-    expect(page).not_to have_content 'New Category'
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 end

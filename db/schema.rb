@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_21_163807) do
     t.bigint "category_id"
     t.bigint "account_id"
     t.bigint "user_id"
-    t.datetime "date_of_creating", default: "2022-04-22 16:52:41"
+    t.datetime "date_of_creating", default: "2022-04-22 19:33:37"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
