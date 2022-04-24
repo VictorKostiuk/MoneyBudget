@@ -26,9 +26,8 @@
         <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3 card-width">
           <% if transaction.image.present? %>
             <% if transaction.image.previewable? %>
-              <%= image_tag transaction.image.preview(
-                  resize_to_fit: [200, 175]
-                  ) %>
+              <%= image_tag("pdf.svg", :alt => "rss feed",
+                            class: "card-img-top card-image") %>
             <% elsif transaction.image.variable? %>
               <%= image_tag transaction.image %>
             <% end %>
@@ -46,7 +45,7 @@
             <% if transaction.date_of_creating != nil %>
               <p class="small"><b>Date of creating:</b> <%= transaction.date_of_creating.strftime('%Y/%m/%d') %></p>
             <% else %>
-              <p class="small"><b>Created at:</b> <%= transaction.created_at.strftime('%Y/%m/%d') %></p>
+              <p class="small"><b>Date of creating:</b> <%= transaction.created_at.strftime('%Y/%m/%d') %></p>
             <% end %>
             <div class="d-flex button">
               <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-dark mx-2 ' %>

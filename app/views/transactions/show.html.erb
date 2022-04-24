@@ -9,7 +9,8 @@
     <h5><strong>Image:</strong></h5>
     <div class="img-block">
       <% if @transaction.image.previewable? %>
-        <%= link_to(image_tag(@transaction.image.preview(resize_to_fit: [500, 500] ),class: 'img'), rails_blob_url(@transaction.image),  :method => :get) %>
+        <%= link_to(image_tag("pdf.svg",
+          class: 'card-img-top card-image img'), rails_blob_url(@transaction.image),target: "_blank" , :method => :get) %>
       <% elsif @transaction.image.variable? %>
         <%= render 'transactions/modal' %>
       <% end %>
