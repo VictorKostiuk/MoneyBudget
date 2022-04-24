@@ -24,6 +24,7 @@ module FeatureHelpers
   end
 
   def create_transaction
+    click_on 'New Transaction'
     fill_in 'Title', with: 'test'
     fill_in 'Body', with: 'test1'
     fill_in 'Cost', with: 12
@@ -36,6 +37,6 @@ module FeatureHelpers
     click_on 'Create Category'
 
     sleep 1
-    expect(Category.count).to eql 1
+    expect change(Category, :count).by(+1)
   end
 end

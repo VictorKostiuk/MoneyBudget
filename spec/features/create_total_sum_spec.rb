@@ -12,6 +12,7 @@ RSpec.describe 'User creates a total_sum', driver: :selenium_chrome do
 
   it 'Non-registered user try create total_sum' do
     visit root_path
-    expect(page).not_to have_content 'New Account'
+
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 end

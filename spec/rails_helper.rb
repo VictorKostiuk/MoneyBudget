@@ -8,7 +8,6 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 # parallelize(workers: :number_of_processors, with: :threads)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
-require 'support/database_cleaner'
 require 'rspec/rails'
 require 'factory_bot'
 require 'capybara/rspec'
@@ -57,6 +56,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -87,4 +87,5 @@ RSpec.configure do |config|
 
   config.include FeatureHelpers, type: :feature
   config.use_transactional_fixtures = false
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end

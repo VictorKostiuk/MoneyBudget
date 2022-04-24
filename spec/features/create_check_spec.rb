@@ -22,8 +22,7 @@ RSpec.describe 'User creates a transaction', driver: :selenium_chrome do
 
   it 'Non-registered user try create transaction' do
     visit accounts_path
-    click_on 'test', match: :first
 
-    expect(page).not_to have_content 'New Transaction'
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 end
