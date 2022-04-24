@@ -25,11 +25,11 @@
       <% if transaction.id != nil %>
         <div class="col-md-3 card shadow-lg p-3 mb-5 bg-body rounded mx-3 card-width">
           <% if transaction.image.present? %>
-            <% if transaction.image.previewable? %>
+            <% if transaction.image.variable? %>
+              <%= image_tag transaction.image %>
+            <% else %>
               <%= image_tag("pdf.svg", :alt => "rss feed",
                             class: "card-img-top card-image") %>
-            <% elsif transaction.image.variable? %>
-              <%= image_tag transaction.image %>
             <% end %>
           <% else %>
             <%= image_tag("image.svg", :alt => "rss feed",
