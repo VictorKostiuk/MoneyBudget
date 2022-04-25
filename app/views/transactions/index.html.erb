@@ -1,3 +1,47 @@
 <h2>Your transactions</h2>
 
-<%  %>
+<div class="transactions row mt-3">
+  <% if current_user %>
+      <table class="table">
+        <thead>
+        <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Cost</th>
+          <th scope="col">Category</th>
+          <th scope="col">Account</th>
+          <th scope="col">Type</th>
+          <th scope="col">Show | Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% current_user.transactions.each do |transaction| %>
+        <% if transaction.type.name == 'income' %>
+          <tr class="table-success">
+        <% elsif transaction.type.name == 'expense' %>
+            <tr class="table-warning">
+        <% elsif transaction.type.name == 'lend' %>
+            <tr class="table-danger">
+        <% elsif transaction.type.name == 'loan' %>
+            <tr class="table-info">
+        <% else %>
+            <tr class="table-danger">
+        <% end %>
+          <th scope="row"><%= transaction.id %></th>
+          <td><%= transaction.title.capitalize %></td>
+          <td><%= transaction.cost %></td>
+          <td><%= link_to transaction.category.name, category_path(transaction.category), class: 'text-dark', style: "text-decoration: none;" %></td>
+          <td><%= link_to transaction.account.title, account_path(transaction.account), class: 'text-dark', style: "text-decoration: none;" %></td>
+          <% if transaction.type != nil %>
+            <td><%= transaction.type.name %></td>
+          <% else %>
+            <td>This transaction is without type</td>
+        <% end %>
+          <td><%= link_to 'Show', transaction_path(transaction), class: 'text-dark', style: "text-decoration: none;" %> |
+            <%= link_to 'Edit', edit_transaction_path(transaction), class: 'text-dark', style: "text-decoration: none;" %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+</div>

@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :transactions
+  resources :types
   resources :categories
   resources :accounts do
     resources :transactions

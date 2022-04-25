@@ -9,6 +9,8 @@ RSpec.describe 'User creates a transaction', driver: :selenium_chrome do
     click_on 'New Category'
     create_category
     click_on 'redirected'
+    visit new_type_path
+    create_type
     visit accounts_path
     click_on 'test', match: :first
     create_transaction

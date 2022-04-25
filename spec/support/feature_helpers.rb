@@ -31,6 +31,11 @@ module FeatureHelpers
     click_on 'Create Transaction'
   end
 
+  def create_type
+    fill_in 'Name', with: 'wda'
+    click_on 'Create Type'
+  end
+
   def create_category
     fill_in 'Name', with: 'test1'
     fill_in 'Description', with: 'About that'
