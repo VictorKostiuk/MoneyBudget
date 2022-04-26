@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :type do
-    name { 'default' }
+    name { Faker::Name.name }
   end
 end

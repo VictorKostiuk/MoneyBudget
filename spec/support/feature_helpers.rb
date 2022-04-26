@@ -32,7 +32,7 @@ module FeatureHelpers
   end
 
   def create_type
-    fill_in 'Name', with: 'wda'
+    fill_in 'Name', with: Faker::Name.name
     click_on 'Create Type'
   end
 
