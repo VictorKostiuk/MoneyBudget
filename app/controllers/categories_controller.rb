@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.create category_params
     if @category.save
-      redirect_to categories_path(@category), status: :ok
+      redirect_to category_path(@category)
     else
       render :new
     end
@@ -26,7 +26,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update category_params
-      redirect_to categories_path, status: :ok
+      redirect_to category_path(@category)
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to account_path(@category)
+    redirect_to categories_path
   end
 
   private

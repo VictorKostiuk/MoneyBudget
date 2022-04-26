@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AccountsController < ApplicationController
-  before_action :set_total_sum!, only: %i[show edit update destroy]
+  before_action :set_account!, only: %i[show edit update destroy]
 
   def index
     @accounts = Account.all
@@ -18,17 +18,17 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = current_user.accounts.build total_sum_params
+    @account = current_user.accounts.build account_params
     if @account.save
-      redirect_to accounts_path(@account), status: :ok
+      redirect_to account_path(@account)
     else
       render :new
     end
   end
 
   def update
-    if @account.update total_sum_params
-      redirect_to account_path(@account), status: :ok
+    if @account.update account_params
+      redirect_to account_path(@account)
     else
       render :edit
     end
@@ -36,16 +36,16 @@ class AccountsController < ApplicationController
 
   def destroy
     @account.destroy
-    redirect_to accounts_path
+    redirect_to account_path(@account)
   end
 
   private
 
-  def total_sum_params
+  def account_params
     params.require(:account).permit(:title, :for_what, :total_count)
   end
 
-  def set_total_sum!
+  def set_account!
     @account = Account.find params[:id]
   end
 end

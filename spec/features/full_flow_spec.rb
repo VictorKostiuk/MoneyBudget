@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Full flow', driver: :selenium_chrome do
-
   it 'creates everything' do
     email = Faker::Internet.unique.email
     visit new_user_registration_path
@@ -27,7 +26,7 @@ RSpec.describe 'Full flow', driver: :selenium_chrome do
 
     create_account
 
-    expect(page).to have_content 'You are being redirected.'
+    expect(page).to have_content 'test'
 
     visit categories_path
     click_on 'New category'
@@ -39,13 +38,12 @@ RSpec.describe 'Full flow', driver: :selenium_chrome do
     visit new_type_path
     create_type
 
-    expect(page).to have_content 'You are being redirected.'
     expect change(Type, :count).by(+1)
 
     visit accounts_path
     click_on 'test', match: :first
     create_transaction
-    click_on 'redirected'
+
 
     within '.transactions' do
       expect(page).to have_content 'test'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TypesController < ApplicationController
   before_action :set_type!, only: %i[show edit update destroy]
 
@@ -16,7 +18,7 @@ class TypesController < ApplicationController
   def create
     @type = Type.new type_params
     if @type.save
-      redirect_to types_path(@type), status: :ok
+      redirect_to type_path(@type), status: :ok
     else
       render :new
     end
