@@ -3,15 +3,15 @@
 module ApplicationHelper
 
   def type_of_transaction(transaction)
-    if transaction.type.name == 'income'
-      "table-success"
-    elsif transaction.type.name == 'expense'
-      "table-warning"
-    elsif transaction.type.name == 'lend'
-      "table-danger"
-    elsif transaction.type.name == 'loan'
-      "table-info"
-    else
+    case
+      when transaction.type.name == 'income'
+        "table-success"
+      when transaction.type.name == 'expense'
+        "table-warning"
+      when transaction.type.name == 'lend'
+        "table-danger"
+      when transaction.type.name == 'loan'
+        "table-info"
     end
   end
 end
