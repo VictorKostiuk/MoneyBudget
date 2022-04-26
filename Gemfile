@@ -13,8 +13,8 @@ gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
-gem 'sprockets-rails'
 gem 'puma', '~> 5.0'
+gem 'sprockets-rails'
 gem 'turbo-rails'
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'

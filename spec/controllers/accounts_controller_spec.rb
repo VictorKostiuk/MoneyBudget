@@ -85,7 +85,7 @@ RSpec.describe AccountsController, type: :controller do
 
       it 'redirects to the updated account' do
         patch :update, params: { account: attributes_for(:account), id: account.id }
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:found)
       end
     end
 
@@ -116,7 +116,7 @@ RSpec.describe AccountsController, type: :controller do
 
       it 'redirects to show view' do
         post :create, params: { account: attributes_for(:account) }
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:found)
       end
     end
 

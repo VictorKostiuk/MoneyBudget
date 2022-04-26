@@ -58,10 +58,22 @@
     </div>
 
     <div class="col-sm-9">
-      <%= form.collection_select :category_id, Category.all, :id, :name, {}, class: 'form-control form-control-lg shadow-lg bg-body rounded '   %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, {}, class: 'form-control form-control-lg shadow-lg bg-body rounded ' %>
     </div>
   </div>
   <br>
+
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :Type %></strong>
+    </div>
+
+    <div class="col-sm-9">
+      <%= form.collection_select :type_id, Type.all, :id, :name, {}, class: 'form-control form-control-lg shadow-lg bg-body rounded ' %>
+    </div>
+  </div>
+  <br>
+
   <div class="form-group">
     <% if @transaction.image.attached? %>
       <%= image_tag @transaction.image, style: "width: 200px; display: block " %>

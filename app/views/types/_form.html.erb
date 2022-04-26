@@ -1,0 +1,25 @@
+<%= form_with(model: @type) do |form| %>
+  <% if @type&.errors&.full_messages&.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @type.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3 row">
+    <div class="col-sm-1 col-form-label">
+      <strong><%= form.label :name %></strong>
+    </div>
+
+    <div class="col-sm-9">
+      <%= form.text_field :name, autocomplete: "Name", class: 'form-control form-control-lg shadow-lg bg-body rounded' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-dark' %>
+  </div>
+<% end %>

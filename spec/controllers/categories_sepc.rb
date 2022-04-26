@@ -70,7 +70,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'changes category attributes' do
-        patch :update, params: { category: { name: 'New', description: 'News'}, id: category.id }
+        patch :update, params: { category: { name: 'New', description: 'News' }, id: category.id }
         category.reload
         expect(category.name).to eq 'default'
         expect(category.description).to eq 'About that'

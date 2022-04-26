@@ -14,8 +14,9 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @account.transactions.build(transaction_params.merge(user_id: current_user.id))
+
     if @transaction.save
-      redirect_to account_path(@account), status: :ok
+      redirect_to account_path(@account)
     else
       render 'accounts/show'
     end
@@ -23,7 +24,7 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update transaction_params
-      redirect_back fallback_location: root_path, status: :ok
+      redirect_back fallback_location: root_path
     else
       render :edit
     end
@@ -37,7 +38,8 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id, :date_of_creating)
+    params.require(:transaction).permit(:title, :body, :cost, :account_id, :image, :category_id, :date_of_creating,
+                                        :type_id)
   end
 
   def set_transaction
